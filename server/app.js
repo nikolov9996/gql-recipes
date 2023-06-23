@@ -10,7 +10,6 @@ const app = express();
 
 app.use(cors());
 
-
 const db_url = `mongodb+srv://recipes:${process.env.DB_PASSWORD}@recipescluster.dyv0lsq.mongodb.net/?retryWrites=true&w=majority`;
 
 mongoose.connect(db_url);

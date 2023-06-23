@@ -15,7 +15,7 @@ export const GET_MANY_RECIPES = gql`
     manyRecipes(count: $count) {
       id
       name
-      ingredients
+      rating
     }
   }
 `;

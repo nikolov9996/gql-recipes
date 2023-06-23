@@ -30,6 +30,7 @@ const RecipeType = new GraphQLObjectType({
     favorites: { type: FavoritesType },
     ratedBy: { type: RatedByType },
     createdBy: { type: GraphQLID },
+    rating: { type: GraphQLInt }
   }),
 });
 
