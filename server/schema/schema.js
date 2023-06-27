@@ -34,6 +34,16 @@ const RecipeType = new GraphQLObjectType({
   }),
 });
 
+const CreateRecipeType = new GraphQLObjectType({
+  name: "CreateRecipe",
+  fields: () => ({
+    filename: { type: GraphQLString },
+    mimetype: { type: GraphQLString },
+    encoding: { type: GraphQLString },
+    url: { type: GraphQLString }
+  })
+})
+
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: () => ({
@@ -79,6 +89,19 @@ const Mutation = new GraphQLObjectType({
         return recipe.save();
       },
     },
+    createRecipe: {
+      type: CreateRecipeType,
+      args: {
+        filename: { type: new GraphQLNonNull(GraphQLString) },
+        mimetype: { type: new GraphQLNonNull(GraphQLString) },
+        encoding: { type: new GraphQLNonNull(GraphQLString) },
+        url: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve(parent, { file }) {
+        console.log(args);
+        // return { image: "fj" }
+      }
+    }
   },
 });
 
