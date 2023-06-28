@@ -12,7 +12,7 @@ export const GET_RECIPE_BY_ID = gql`
 
 export const GET_MANY_RECIPES = gql`
   query ($count: Int) {
-    manyRecipes(count: $count) {
+    getManyRecipes(count: $count) {
       id
       name
       rating
