@@ -1,27 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import reportWebVitals from 'reportWebVitals';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import Home from 'pages/Home';
-import "index.css"
-import { ROUTES } from 'app/routes';
-import Recipe from 'pages/Recipe';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import reportWebVitals from "reportWebVitals";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from "pages/Home";
+import "index.css";
+import { ROUTES } from "app/routes";
+import Recipe from "pages/Recipe";
+import { createUploadLink } from "apollo-upload-client";
 
-let uri;
+export let uri;
 
-if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-  uri = "http://localhost:8080/graphql"
+if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+  uri = "http://localhost:8080/graphql";
 } else {
-  uri = "https://recipes-graphql.onrender.com/graphql"
+  uri = "https://recipes-graphql.onrender.com/graphql";
 }
 
 const client = new ApolloClient({
   uri: uri,
   cache: new InMemoryCache(),
+  link: createUploadLink({ uri }),
 });
 
 const router = createBrowserRouter([
@@ -35,7 +34,8 @@ const router = createBrowserRouter([
   },
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>

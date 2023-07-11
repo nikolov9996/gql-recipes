@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const GET_RECIPE_BY_ID = gql`
   query ($id: ID) {
-    recipe(id: $id) {
+    findRecipeById(id: $id) {
       id
       name
       ingredients

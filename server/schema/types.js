@@ -1,15 +1,21 @@
-const { gql } = require("apollo-server-express");
+export const typeDefs = `
+ scalar File
 
-module.exports.typeDefs = gql`
-  type Recipe {
+   type Recipe {
     name: String
     id: ID
     prepTime: Int
     cookTime: Int
     rating: Int
+    ingredients: [String]
   }
+
   type Query {
     findRecipeById(id: ID): Recipe
     getManyRecipes(count: Int): [Recipe]
+  }
+
+  type Mutation {
+        saveFile(files:[File]!): Boolean!
   }
 `;

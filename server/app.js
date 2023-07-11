@@ -1,12 +1,12 @@
-require("dotenv").config();
-const express = require("express");
-const { ApolloServer, gql } = require("apollo-server-express");
-const cors = require("cors");
-const { default: mongoose } = require("mongoose");
-const { typeDefs } = require("./schema/types");
-const { findRecipeById, getManyRecipes } = require("./schema/resolvers");
+import express from "express";
+import dotenv from "dotenv";
+import { mongoose } from "mongoose";
+import { schema } from "./schema/schema.js";
+import { createYoga } from "graphql-yoga";
+dotenv.config();
 
 const PORT = process.env.PORT || 8080;
+const app = express();
 
 const db_url = `mongodb+srv://recipes:${process.env.DB_PASSWORD}@recipescluster.dyv0lsq.mongodb.net/?retryWrites=true&w=majority`;
 
@@ -16,25 +16,10 @@ mongoose.connection.once("open", () => {
   console.log("DB CONNECTED");
 });
 
-// Provide resolver functions for schema fields
-const resolvers = {
-  Query: {
-    findRecipeById: findRecipeById,
-    getManyRecipes: getManyRecipes,
-  },
-};
+const yoga = createYoga({ schema });
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = app.use(yoga);
 
-const app = express();
-app.use(cors());
-
-server.start().then(() => {
-  server.applyMiddleware({ app });
+server.listen(8080, () => {
+  console.info("Server is running on PORT: " + PORT);
 });
-
-app.listen({ port: PORT }, () =>
-  console.log(
-    `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
-  )
-);
