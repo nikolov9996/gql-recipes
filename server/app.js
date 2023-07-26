@@ -7,7 +7,6 @@ dotenv.config();
 
 const PORT = process.env.PORT || 8080;
 const app = express();
-
 const db_url = `mongodb+srv://recipes:${process.env.DB_PASSWORD}@recipescluster.dyv0lsq.mongodb.net/?retryWrites=true&w=majority`;
 
 mongoose.connect(db_url);

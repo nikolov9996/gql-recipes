@@ -1,0 +1,11 @@
+-- SERVER --
+complete create recipe Mutation
+
+-- CLIENT --
+add form for creating recipe
+add upload files form 
+
+(
+    files will be uploaded before recipe creation
+    if canceled the files will be deleted from cloudinary
+)

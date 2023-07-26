@@ -2,15 +2,16 @@ import React from "react";
 import RecipesList from "components/RecipesList/RecipesList";
 import { useMutation } from "@apollo/client";
 import { MUTATION } from "queries/mutations";
-import { createUploadLink } from "apollo-upload-client";
-import { uri } from "index";
 
 function UploadFiles() {
   const [mutate] = useMutation(MUTATION);
 
-  function onChange({ target: { validity, files } }) {
+  async function onChange({ target: { validity, files } }) {
     try {
-      if (validity.valid) mutate({ variables: { files } });
+      if (validity.valid) {
+        const { data } = await mutate({ variables: { files } });
+        console.log(data);
+      }
     } catch (error) {
       console.log(error);
     }

@@ -1,6 +1,11 @@
 import { createSchema } from "graphql-yoga";
 import { typeDefs } from "./types.js";
-import { findRecipeById, getManyRecipes, saveFile } from "./resolvers.js";
+import {
+  findRecipeById,
+  getManyRecipes,
+  saveFile,
+  createRecipe,
+} from "./resolvers.js";
 
 export const schema = createSchema({
   typeDefs: typeDefs,
@@ -11,6 +16,7 @@ export const schema = createSchema({
     },
     Mutation: {
       saveFile,
+      createRecipe,
     },
   },
 });

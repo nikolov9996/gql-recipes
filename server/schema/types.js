@@ -1,13 +1,15 @@
-export const typeDefs = `
- scalar File
+import { gql } from "apollo-server-express";
 
-   type Recipe {
-    name: String
+export const typeDefs = gql`
+  scalar File
+
+  type Recipe {
+    name: String!
     id: ID
-    prepTime: Int
-    cookTime: Int
+    prepTime: Int!
+    cookTime: Int!
     rating: Int
-    ingredients: [String]
+    ingredients: [String]!
   }
 
   type Query {
@@ -16,6 +18,12 @@ export const typeDefs = `
   }
 
   type Mutation {
-        saveFile(files:[File]!): Boolean!
+    saveFile(files: [File]!): Boolean!
+    createRecipe(
+      name: String!
+      prepTime: Int
+      cookTime: Int
+      ingredients: [String!]
+    ): Recipe
   }
 `;
